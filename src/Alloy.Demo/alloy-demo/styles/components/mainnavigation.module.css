@@ -1,0 +1,27 @@
+.menu {
+    background-color: #f4f4f6;
+
+    width: 100vw;
+
+    padding:  1rem;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    /*border: 1px solid blue;*/
+
+}
+
+.menu ul li {
+    color: black;
+    /*border: 1px solid red;*/
+    margin: 1rem 1rem 0 0;
+}
+
+.menu ul li a:hover {
+    text-decoration: underline;
+}

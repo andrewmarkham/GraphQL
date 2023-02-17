@@ -1,0 +1,11 @@
+.container {
+    background-size: cover;
+    position: relative;
+    background-position: 50% 50%;
+
+    padding: 6rem 4rem;
+
+    background-color: white;
+    color: white;;
+}
+

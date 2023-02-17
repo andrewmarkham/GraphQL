@@ -1,0 +1,27 @@
+.container {
+    background-color: white;
+    text-align: center;
+    color: black;
+
+    padding: 1rem;
+}
+
+.container > .imgwrapper {
+    background-color: white;
+}
+
+.imgwrapper > img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+
+    width: fit-content;
+}
+
+.container > h2 {
+    margin: 5px;
+}
+
+.container > p {
+    margin: 5px;;
+}

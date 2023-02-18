@@ -1,13 +1,6 @@
 namespace Alloy.Admin;
-using Azure.Extensions.AspNetCore.Configuration.Secrets;
 using Azure.Identity;
 using Microsoft.AspNetCore.Hosting;
-using Azure.Extensions.AspNetCore.Configuration.Secrets;
-using Azure.Identity;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 public class Program
@@ -26,7 +19,7 @@ public class Program
                     var keyVaultEndpoint = settings["AzureKeyVaultEndpoint"];
                     var azureADManagedIdentityClientId = settings["AzureADManagedIdentityClientId"];
 
-                    var uri = new Uri(settings[keyVaultEndpoint]);
+                    var uri = new Uri(keyVaultEndpoint);
                     config.AddAzureKeyVault(uri, new DefaultAzureCredential(new DefaultAzureCredentialOptions
                     {
                         ManagedIdentityClientId = azureADManagedIdentityClientId

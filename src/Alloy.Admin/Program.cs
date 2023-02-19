@@ -10,21 +10,21 @@ public class Program
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
             .ConfigureCmsDefaults()
-            .ConfigureAppConfiguration((context, config) =>
-            {
-                var settings = config.Build();
-
-                if (!context.HostingEnvironment.IsDevelopment())
+            /*
+                .ConfigureAppConfiguration((context, config) =>
                 {
-                    var keyVaultEndpoint = settings["AzureKeyVaultEndpoint"];
-                    var azureADManagedIdentityClientId = settings["AzureADManagedIdentityClientId"];
+                    var settings = config.Build();
 
-                    var uri = new Uri(keyVaultEndpoint);
-                    config.AddAzureKeyVault(uri, new DefaultAzureCredential(new DefaultAzureCredentialOptions
+                    if (!context.HostingEnvironment.IsDevelopment())
                     {
-                        ManagedIdentityClientId = azureADManagedIdentityClientId
-                    }));
-                }
-            })
+                        var keyVaultEndpoint = settings["AzureKeyVaultEndpoint"];
+                        var azureADManagedIdentityClientId = settings["AzureADManagedIdentityClientId"];
+
+
+                        var uri = new Uri(keyVaultEndpoint);
+                        config.AddAzureKeyVault(uri, new DefaultAzureCredential());
+                    }
+                })
+            */
             .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
 }

@@ -5,6 +5,8 @@ using EPiServer.DependencyInjection;
 using EPiServer.Scheduler;
 using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
+using EPiServer.Azure;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Alloy.Admin;
 
@@ -50,6 +52,14 @@ public class Startup
 
         services.AddContentGraph(configuration);
 
+
+        var blobConnectionString = this.configuration.GetConnectionString("BlobStorage");
+
+        services.AddAzureBlobProvider(o =>
+        {
+            o.ConnectionString = blobConnectionString;
+            o.ContainerName = "sitedata";
+        });
 
         services.AddSession(options =>
         {

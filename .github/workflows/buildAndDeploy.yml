@@ -52,6 +52,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget-
 
+      #substitute production appsettings entries to appsettings json file
+      - name: App Settings Variable Substitution
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: './src/Alloy.Admin/appsettings.Production.json'
+        env:
+          Optimizely.ContentGraph.AppKey: ${{ secrets.ContentGraph_AppKey }}
+          Optimizely.ContentGraph.Secret: ${{ secrets.ContentGraph_Secret }}
+          Optimizely.ContentGraph.SingleKey: ${{ secrets.ContentGraph_SingleKey }}
+          
       - name: Build with dotnet
         run: dotnet build ./src/Alloy.Admin/Alloy.Admin.csproj --configuration Release
 
@@ -63,7 +73,7 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-
+          
   deploy:
     permissions:
       contents: none

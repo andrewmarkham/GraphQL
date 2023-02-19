@@ -54,7 +54,7 @@ jobs:
 
       #substitute production appsettings entries to appsettings json file
       - name: App Settings Variable Substitution
-        uses: microsoft/variable-substitution@2
+        uses: microsoft/variable-substitution@1
         with:
           files: '${{env.DOTNET_ROOT}}/**/appsettings.Production.json'
         env:

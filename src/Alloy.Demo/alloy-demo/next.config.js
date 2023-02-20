@@ -7,7 +7,7 @@ const nextConfig = {
   },
   trailingSlash: true,
   images: {
-    domains: ['localhost'],
+    domains: ['localhost','alloy-graph-admin.azurewebsites.net'],
     remotePatterns: [
       {
         protocol: 'http',

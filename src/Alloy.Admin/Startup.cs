@@ -7,6 +7,7 @@ using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
 using EPiServer.Azure;
 using Microsoft.Extensions.DependencyInjection;
+using RestSharp;
 
 namespace Alloy.Admin;
 
@@ -15,10 +16,14 @@ public class Startup
     private readonly IWebHostEnvironment _webHostingEnvironment;
     private readonly IConfiguration configuration;
 
+    private readonly RestClient client;
+
     public Startup(IWebHostEnvironment webHostingEnvironment, IConfiguration configuration)
     {
         _webHostingEnvironment = webHostingEnvironment;
         this.configuration = configuration;
+
+        client = new RestClient("https://graph-ql-three.vercel.app/");
     }
 
     public void ConfigureServices(IServiceCollection services)
@@ -69,7 +74,7 @@ public class Startup
         });
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IContentEvents contentEvents)
     {
         if (env.IsDevelopment())
         {
@@ -89,5 +94,22 @@ public class Startup
         {
             endpoints.MapContent();
         });
+
+        contentEvents.PublishedContent += ContentEvents_PublishedContent;
+    }
+
+    private void ContentEvents_PublishedContent(object sender, ContentEventArgs e)
+    {
+        if (e.Content is IRoutable routableContent)
+        {
+            var request = new RevalidateRequest { RevalidatePath = $"/{routableContent.RouteSegment}" };
+
+            client.PostJsonAsync<RevalidateRequest>("/api/revalidate/?secret=faaabbcfc62249ad84541503c553b648", request);
+        }
+    }
+
+    private class RevalidateRequest
+    {
+        public string RevalidatePath { get; set; }
     }
 }

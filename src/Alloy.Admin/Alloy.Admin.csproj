@@ -21,6 +21,7 @@
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
     <PackageReference Include="Azure.Identity" Version="1.8.2" />
     <PackageReference Include="EPiServer.Azure" Version="11.1.0" />
+    <PackageReference Include="RestSharp" Version="108.0.3" />
   </ItemGroup>
   
   <ItemGroup>
@@ -32,5 +33,6 @@
     <None Remove="Azure.Extensions.AspNetCore.Configuration.Secrets" />
     <None Remove="Azure.Identity" />
     <None Remove="EPiServer.Azure" />
+    <None Remove="RestSharp" />
   </ItemGroup>
 </Project>

@@ -104,12 +104,16 @@ public class Startup
         {
             var url = UrlResolver.Current.GetUrl(e.ContentLink);
 
-            var request = new RevalidateRequest { RevalidatePath = url };
+            Task.Run(() =>
+            {
+                var request = new RevalidateRequest { RevalidatePath = url };
 
-            var r = client.PostJsonAsync<RevalidateRequest>("/api/revalidate/", request);
+                Task.Delay(10000);  // wait 10 seconds
 
-            Task.WaitAll(new[] { r });
+                var r = client.PostJsonAsync<RevalidateRequest>("/api/revalidate/", request);
 
+                Task.WaitAll(new[] { r });
+            });
 
         }
     }

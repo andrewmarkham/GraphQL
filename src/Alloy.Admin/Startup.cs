@@ -102,9 +102,15 @@ public class Startup
     {
         if (e.Content is IRoutable routableContent)
         {
-            var request = new RevalidateRequest { RevalidatePath = $"/{routableContent.RouteSegment}" };
+            var url = UrlResolver.Current.GetUrl(e.ContentLink);
 
-            client.PostJsonAsync<RevalidateRequest>("/api/revalidate/?secret=faaabbcfc62249ad84541503c553b648", request);
+            var request = new RevalidateRequest { RevalidatePath = url };
+
+            var r = client.PostJsonAsync<RevalidateRequest>("/api/revalidate/", request);
+
+            Task.WaitAll(new[] { r });
+
+
         }
     }
 

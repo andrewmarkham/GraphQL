@@ -110,8 +110,6 @@ public class Startup
 
                 Task.Delay(10000);  // wait 10 seconds
 
-                //var uri = new UriBuilder("");
-                //uri.
                 var r = client.PostJsonAsync<RevalidateRequest>("/api/revalidate/?secret=faaabbcfc62249ad84541503c553b648", request);
 
                 Task.WaitAll(new[] { r });
